@@ -1,0 +1,132 @@
+﻿@model UserDetails.ViewModel.EmployeeViewModel
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.EmployeeId != 0 ? "Edit" : "Create")</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form asp-controller="Employee" asp-action="CreateOrEdit" method="post" class="row">
+            <div class="border p-3">
+                <input asp-for="EmployeeId" hidden />
+                <div asp-validation-summary="ModelOnly"></div>
+
+
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Name" class="form-control border-0 shadow"/>
+                    <label asp-for="Name" class="ms-2"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Email" class="form-control border-0 shadow" />
+                    <label asp-for="Email" class="ms-2"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Address" class="form-control border-0 shadow" />
+                    <label asp-for="Address" class="ms-2"></label>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SelectedGenderId"></label>
+                    <div>
+                        <input asp-for="SelectedGenderId" type="radio" value="1"/> Male
+                        <input asp-for="SelectedGenderId" type="radio" value="2"/> Female
+                        <span asp-validation-for="SelectedGenderId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label asp-for="SelectedDepartmentId" class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <select asp-for="SelectedDepartmentId" asp-items="Model.DepartmentList" class="form-control">
+                            <option value="">Select Designation</option>
+                        </select>
+                        <span asp-validation-for="SelectedDepartmentId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SelectedHobbies" class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        @foreach (var hobby in Model.HobbyOptions)
+                        {
+                            <div>
+                                <input type="checkbox" id="@hobby.Value" name="SelectedHobbies" value="@hobby.Value" checked="@(Model.SelectedHobbies != null && Model.SelectedHobbies.Contains(Convert.ToInt32(hobby.Value)))" />
+                                <label for="@hobby.Value">@hobby.Text</label>
+                            </div>
+                        }
+                        <span asp-validation-for="SelectedHobbies" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SelectedCountryId" class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <select asp-for="SelectedCountryId" id="countryDropdown" asp-items="Model.CountryList" class="form-control">
+                            <option value="">Select Country</option>
+                        </select>
+                        <span asp-validation-for="SelectedCountryId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SelectedStateId" class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <select asp-for="SelectedStateId" id="stateDropdown" asp-items="Model.StateList" class="form-control">
+                            <option value="">Select State</option>
+                        </select>
+                        <span asp-validation-for="SelectedStateId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SelectedCityId" class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <select asp-for="SelectedCityId" id="cityDropdown" asp-items="Model.CityList" class="form-control">
+                            <option value="">Select City</option>
+                        </select>
+                        <span asp-validation-for="SelectedCityId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="row mt-3">
+                    <div class="col-6 col-md-3">
+                        @if (Model.EmployeeId != 0)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Edit</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Create</button>
+                        }
+                        
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Country" asp-action="Index" class="btn btn-outline-primary border form-control">
+                            Back to list
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    
+    <script src="~/js/DropDown.js"></script>
+    
+}

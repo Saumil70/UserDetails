@@ -1,0 +1,49 @@
+﻿@model List<City>
+
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                City List
+            </h2>
+        </div>
+    
+        <div class="col-6 text-end">
+
+            <button id="createBtn" class="btn btn-primary">Create New City</button>
+
+        </div>
+    </div>
+</div>
+
+<table id="tblData" class="table table-bordered table-stripped" style="width:100%">
+    <thead>
+        <tr>
+            <th>City Id</th>
+            <th>City Name</th>
+            <th>State Name</th>
+            <th></th>
+
+        </tr>
+    </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-country-id="@item.StateId">
+                <td>@item.CityId</td>
+                <td>@item.CityName</td>
+                <td>@item.States.StateName</td>
+                <td>
+                    <button data-country-id="@item.CityId" class="editBtn btn btn-primary">Edit</button>
+                    <button data-country-id="@item.CityId" class="deleteBtn btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section Scripts {
+    <script src="~/js/City.js"></script>
+}

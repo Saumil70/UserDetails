@@ -1,0 +1,45 @@
+﻿@model List<Countries>
+
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Country List
+            </h2>
+        </div>
+    
+        <div class="col-6 text-end">
+        <button id="createBtn" class="btn btn-primary">Create New Country</button>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-stripped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Country Id</th>
+            <th>Country Name</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-country-id="@item.CountryId">
+                <td>@Html.DisplayFor(modelItem => item.CountryId)</td>
+                <td>@Html.DisplayFor(modelItem => item.CountryName)</td>
+                <td>
+                    <button data-country-id="@item.CountryId" class="editBtn btn btn-primary">Edit</button>
+                    <button data-country-id="@item.CountryId" class="deleteBtn btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section Scripts {
+    <script src="~/js/Country.js"></script>
+}

@@ -1,0 +1,67 @@
+﻿@model List<Employee>
+
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Employee List
+            </h2>
+        </div>
+    
+        <div class="col-6 text-end">
+            <button id="createBtn" class="btn btn-primary">Create New Employee</button>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-stripped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Employee Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Gender</th>
+            <th>Hobbie</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>City</th>
+            <th></th>
+
+        </tr>
+    </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-employee-id="@item.EmployeeId">
+                <td>@item.EmployeeId</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Address</td>
+                <td>@item.Department.DepartmentName</td>
+                <td>@item.Gender.GenderName</td>
+                <td>
+                    @foreach (var hobby in item.EmployeeHobbies)
+                    {
+                        @hobby.Hobbies.HobbiesName
+                        <br />
+                    }
+                </td>
+                <td>@item.Country.CountryName</td>
+                <td>@item.States.StateName</td>
+                <td>@item.Cities.CityName</td>
+                <td>
+                    <button data-employee-id="@item.EmployeeId" class="editBtn btn btn-primary">Edit</button>
+                    <button data-employee-id="@item.EmployeeId" class="deleteBtn btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section Scripts {
+    <script src="~/js/Employee.js"></script>
+}
